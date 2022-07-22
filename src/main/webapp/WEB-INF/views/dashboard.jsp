@@ -28,7 +28,7 @@
 	<span ng-cloak ng-controller="userController"
 		ng-init="setUserId(${ user.id })"></span>
 	<h2>welcome back ${user.userName}!</h2>
-	<a href="/NewBTracker">Log out</a>
+	<a href="/NewBornTracker">Log out</a>
 	<div class="container h-100" ng-controller="mainController as ctrl">
 		<div class="container-fluid">
 			<div class="row w-100 h-100">
