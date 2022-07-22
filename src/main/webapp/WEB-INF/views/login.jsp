@@ -15,7 +15,7 @@
 	type="text/css"></link>
 </head>
 <body>
-	<h2>Sign in or Sign up!</h2>
+	<h2>Sign in or Sign up!</h2> 
 	<nav>
 		<a href="/NewBornTracker">Home</a>
 	</nav>

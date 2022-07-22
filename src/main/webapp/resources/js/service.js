@@ -6,7 +6,7 @@ mainServiceFactory.$inject = ['$http', '$log']
 
 function mainServiceFactory($http, $log) {
 
-	const URL = "http://localhost:8080/NewBTracker/events/";
+	const URL = "http://localhost:8080/NewBornTracker/events/";
 
 	const factory = {
 		fetchAllEvents: fetchAllEvents,
@@ -21,6 +21,7 @@ function mainServiceFactory($http, $log) {
 		$log.log(URL + userId)
 		return $http.get(URL + userId).then(
 			function(response) {
+				$log.log(response.data);
 				return response.data;
 			},
 			function(errResponse) {

@@ -37,6 +37,7 @@ angular.module('myApp').controller("mainController", ['$scope', '$log', 'mainSer
 		self.feeds = []
 		self.changes = []
 		self.sleeps = []
+		$log.log("fetching items")
 		mainService.fetchAllEvents(self.userId)
 			.then(
 				function(d) {
@@ -63,37 +64,36 @@ angular.module('myApp').controller("mainController", ['$scope', '$log', 'mainSer
 		console.log(event)
 		mainService.createEvent(self.userId, event)
 			.then(
-				reset(event.type.type),
-				fetchAllEvents(),
-				console.log("made it past all callbacks"),
+				fetchAllEvents,
 				function(errResponse) {
 					$log.error('Error while creating main ', errResponse);
 				}
 			);
-
+		reset(event.type.type)
+		console.log("made it past call backs")
 	}
 
 	function updateEvent(event) {
 		$log.log("made it to update")
 		mainService.updateEvent(self.userId, event)
 			.then(
-				reset(event.type.type),
-				fetchAllEvents(),
+				fetchAllEvents,
 				function(errResponse) {
 					$log.error('Error while updating event ', errResponse);
 				}
 			);
+		reset(event.type.type)
 	}
 
 	function deleteEvent(event) {
 		mainService.deleteEvent(self.userId, event)
 			.then(
-				reset(event.type.type),
-				fetchAllEvents(),
+				fetchAllEvents,
 				function(errResponse) {
 					$log.error('Error while deleting event ', errResponse);
 				}
 			);
+		reset(event.type.type)
 	}
 
 	function submit(type) {

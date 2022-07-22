@@ -12,7 +12,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css"
-	type="text/css"></link>
+	type="text/css"></link> 
 </head>
 <body>
 	<h2>Welcome to the New Born Tracker App!</h2>

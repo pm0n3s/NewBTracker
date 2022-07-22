@@ -14,6 +14,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css"
 	type="text/css"></link>
+
 <script src="https://code.angularjs.org/1.8.2/angular.min.js"></script>
 <script src="https://code.angularjs.org/1.8.2/angular-route.min.js"></script>
 <script type="text/javascript"
@@ -274,7 +275,8 @@
 											class="btn btn-sm btn-primary"
 											ng-disabled="mySleepForm.$invalid">
 										<button type="button" ng-click="ctrl.reset('sleep')"
-											class="btn btn-sm btn-warning" style="background-color:darkpink"
+											class="btn btn-sm btn-warning"
+											style="background-color: darkpink"
 											ng-disabled="mySleepForm.$pristine">Reset Form</button>
 									</div>
 								</div>
