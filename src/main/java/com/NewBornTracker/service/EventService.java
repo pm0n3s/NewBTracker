@@ -1,70 +1,63 @@
 package com.NewBornTracker.service;
 
-import java.util.HashMap;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.NewBornTracker.dao.EventDao;
 import com.NewBornTracker.model.Event;
-import com.NewBornTracker.model.User;
+import com.NewBornTracker.model.abstracts.EventType;
 
 @Service
 @Transactional
 public class EventService {
-
-	@Autowired
-	private UserService userService;
 	
-	private static final AtomicLong counter = new AtomicLong();
+	@Autowired
+	private EventDao eventDao;
 
-	public void saveEvent(Long id, Event event) {
-		System.out.println("made it to service");
-		event.setId(counter.incrementAndGet());
-		userService.getUserMap().get(id).setEvent(event);
+	public List<Event> findAllEvents() {
+		return eventDao.findAllEvents();
 	}
 
-	public HashMap<Long, User> findAllEvents() {
-		return null;
+	public Event findEventById(long eventid) {
+		return  eventDao.findById(eventid);
 	}
 
-	public Event findEventById(long userid, long eventid) {
-		if (userService.getUserMap().containsKey(userid)) {
-			User u = userService.findById(userid);
-			for(Event e : u.getEventList()) {
-				if(e.getId().equals(eventid)) {
-					return e;
-				}
-			}
-		}
-		return null;
+	public EventType saveEventType(EventType type) {
+		return eventDao.saveEventType(type);
 	}
 
+	public void saveEvent(long id, Event event, EventType et) {
+		eventDao.save(id, event, et);
+	}
 
-	public void updateEvent(long id, Event event) {
-		if (userService.getUserMap().containsKey(id)) {
-			User u = userService.findById(id);
-			for(int i=0; i<u.getEventList().size(); i++) {
-				if(u.getEventList().get(i).getId().equals(event.getId())) {
-					u.getEventList().set(i, event);
-				}
-			}
-		}
+	public Event updateEvent(Event event) {
+
+		Event currentEvent = findEventById(event.getId());
+		
+		updateEventType(event.getType());
+		
+		currentEvent.setTime(event.getTime());
+		currentEvent.setNotes(event.getNotes());
+
+		eventDao.update(currentEvent);
+		return currentEvent;
 	}
 
 	public void deleteEventById(long userid, long eventid) {
-		if (userService.getUserMap().containsKey(userid)) {
-			User u = userService.findById(userid);
-			Event ev = null;
-			for(Event e : u.getEventList()) {
-				if(e.getId().equals(eventid)) {
-					ev = e;
-					break;
-				}
-			}
-			u.getEventList().remove(ev);
-		}
+		eventDao.delete(eventid);
+	}
+
+	public EventType findEventTypeById(Long id) {
+		return eventDao.findEventTypeById(id);
+	}
+
+	public void updateEventType(EventType et) {
+		eventDao.updateEventType(et);
 	}
 
 }

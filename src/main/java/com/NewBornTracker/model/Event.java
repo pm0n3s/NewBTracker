@@ -4,34 +4,54 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import com.NewBornTracker.model.abstracts.EventType;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+@Entity
+@Table(name="event")
 public class Event {
 	
 	private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm");
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long Id;
+	
 	@JsonFormat(pattern= "MM-dd-yyyy HH:mm", shape= JsonFormat.Shape.STRING)
-	private LocalDateTime time;
-	private EventType type;
+	@Column(name="event_time")
+	private LocalDateTime eventTime;
+	
+	@OneToOne(cascade = {CascadeType.REMOVE})
+	@JoinColumn(name="selecttype_id")
+	private EventType selectType;
+	
+	@Column(name="notes")
 	private String notes;
 	
-	public Event() {};
+	@ManyToOne
+	@JsonIgnore
+	@JoinColumn(name="user_id")
+	private User userId;
 	
-	public Event(Long id, LocalDateTime time, EventType type, String notes) {
-		super();
-		Id = id;
-		this.time = time.truncatedTo(ChronoUnit.MINUTES);
-		this.type = type;
-		this.notes = notes;
-	}
+	public Event() {};
 	
 	public Event(Long id, String time, EventType type, String notes) {
 		super();
 		Id = id;
-		this.time = LocalDateTime.parse(time, FORMATTER);
-		this.type = type;
+		this.eventTime = LocalDateTime.parse(time, FORMATTER);
+		this.selectType = type;
 		this.notes = notes;
 	}
 
@@ -52,18 +72,31 @@ public class Event {
 	}
 
 	public LocalDateTime getTime() {
-		return time;
+		return eventTime;
 	}
 
 	public void setTime(LocalDateTime time) {
-		this.time = time;
+		this.eventTime = time;
+	}
+	
+	public void setTime(String time) {
+		this.eventTime = LocalDateTime.parse(time, FORMATTER);
 	}
 
 	public EventType getType() {
-		return type;
+		return selectType;
 	}
 
 	public void setType(EventType type) {
-		this.type = type;
+		this.selectType = type;
 	}
+
+	public User getUserId() {
+		return userId;
+	}
+
+	public void setUserId(User userId) {
+		this.userId = userId;
+	}
+	
 }

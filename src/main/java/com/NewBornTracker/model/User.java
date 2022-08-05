@@ -1,23 +1,36 @@
 package com.NewBornTracker.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
-public class User implements Serializable{
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2878028119510431602L;
+@Entity
+@Table(name="users")
+public class User{
 
 	public User() {};
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long Id;
+	@Column(name="username")
 	private String userName;
+	@Column(name="email")
 	private String email;
+	@Column(name="phone")
 	private String phone;
+	@Column(name="password")
 	private String password;
-	private ArrayList<Event> eventList;
+	@OneToMany(mappedBy="userId", fetch=FetchType.EAGER)
+	private List<Event> eventList;
 
 	public User(Long id, String userName, String email, String phone, String password) {
 		super();
@@ -69,7 +82,7 @@ public class User implements Serializable{
 		this.password = password;
 	}
 	
-	public ArrayList<Event> getEventList(){
+	public List<Event> getEventList(){
 		return eventList;
 	}
 	
@@ -77,14 +90,14 @@ public class User implements Serializable{
 		this.eventList.add(event);
 	}
 
-	public void setEventList(ArrayList<Event> eventList) {
+	public void setEventList(List<Event> eventList) {
 		this.eventList = eventList;
 	}
 
 	@Override
 	public String toString() {
 		return "User [Id=" + Id + ", userName=" + userName + ", email=" + email + ", phone=" + phone + ", password="
-				+ password + ", eventList=" + eventList + "]";
+				+ password + "]";
 	}
 	
 }
