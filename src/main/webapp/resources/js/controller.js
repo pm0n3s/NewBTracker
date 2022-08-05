@@ -16,9 +16,9 @@ angular.module('myApp').controller("mainController", ['$scope', '$log', 'mainSer
 
 	self.userId = uId
 
-	self.feed = { id: null, time: '', notes: '', type: { type: 'feed', amount: '' } }
-	self.change = { id: null, time: '', notes: '', type: { type: 'change', changeType: '' } }
-	self.sleep = { id: null, time: '', notes: '', type: { type: 'sleep', wakeup: '' } }
+	self.feed = { id: null, eventTime: '', notes: '', type: { selectType: 'feed', amount: '', id: null } }
+	self.change = { id: null, eventTime: '', notes: '', type: { selectType: 'change', changeType: '', id: null } }
+	self.sleep = { id: null, eventTime: '', notes: '', type: { selectType: 'sleep', wakeup: '', id: null } }
 
 	self.feeds = []
 	self.changes = []
@@ -41,14 +41,13 @@ angular.module('myApp').controller("mainController", ['$scope', '$log', 'mainSer
 		mainService.fetchAllEvents(self.userId)
 			.then(
 				function(d) {
-					console.log(d)
 					for (let event of d.eventList) {
-						console.log(event.type.type)
-						if (event.type.type === 'feed') {
+						delete event.time
+						if (event.type.selectType === 'feed') {
 							self.feeds.push(event)
-						} else if (event.type.type === 'change') {
+						} else if (event.type.selectType === 'change') {
 							self.changes.push(event)
-						} else if (event.type.type === 'sleep') {
+						} else if (event.type.selectType === 'sleep') {
 							self.sleeps.push(event)
 						}
 					}
@@ -60,8 +59,6 @@ angular.module('myApp').controller("mainController", ['$scope', '$log', 'mainSer
 	}
 
 	function createEvent(event) {
-		console.log("inside angular create conroller")
-		console.log(event)
 		mainService.createEvent(self.userId, event)
 			.then(
 				fetchAllEvents,
@@ -69,12 +66,9 @@ angular.module('myApp').controller("mainController", ['$scope', '$log', 'mainSer
 					$log.error('Error while creating main ', errResponse);
 				}
 			);
-		reset(event.type.type)
-		console.log("made it past call backs")
 	}
 
 	function updateEvent(event) {
-		$log.log("made it to update")
 		mainService.updateEvent(self.userId, event)
 			.then(
 				fetchAllEvents,
@@ -82,7 +76,6 @@ angular.module('myApp').controller("mainController", ['$scope', '$log', 'mainSer
 					$log.error('Error while updating event ', errResponse);
 				}
 			);
-		reset(event.type.type)
 	}
 
 	function deleteEvent(event) {
@@ -93,7 +86,7 @@ angular.module('myApp').controller("mainController", ['$scope', '$log', 'mainSer
 					$log.error('Error while deleting event ', errResponse);
 				}
 			);
-		reset(event.type.type)
+		reset(event.type.selectType)
 	}
 
 	function submit(type) {
@@ -122,7 +115,7 @@ angular.module('myApp').controller("mainController", ['$scope', '$log', 'mainSer
 				$log.log('Sleep updated with id ', self.sleep.id);
 			}
 		}
-		reset();
+		reset(type)
 	}
 
 	function edit(id, type) {
@@ -150,13 +143,13 @@ angular.module('myApp').controller("mainController", ['$scope', '$log', 'mainSer
 
 	function reset(type) {
 		if (type === 'feed') {
-			self.feed = { id: null, time: '', notes: '', type: { type: 'feed', amount: '' } }
+			self.feed = { id: null, eventTime: '', notes: '', type: { selectType: 'feed', amount: '', id: null } }
 			$scope.myFeedForm.$setPristine()
 		} else if (type === 'change') {
-			self.change = { id: null, time: '', notes: '', type: { type: 'change', changeType: '' } }
+			self.change = { id: null, eventTime: '', notes: '', type: { selectType: 'change', changeType: '', id: null } }
 			$scope.myChangeForm.$setPristine();
 		} else if (type === 'sleep') {
-			self.sleep = { id: null, time: '', notes: '', type: { type: 'sleep', wakeup: '' } }
+			self.sleep = { id: null, eventTime: '', notes: '', type: { selectType: 'sleep', wakeup: '', id: null } }
 			$scope.mySleepForm.$setPristine();
 		}
 	}

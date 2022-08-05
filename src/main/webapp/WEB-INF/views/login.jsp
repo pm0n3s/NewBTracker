@@ -15,7 +15,7 @@
 	type="text/css"></link>
 </head>
 <body>
-	<h2>Sign in or Sign up!</h2> 
+	<h2>Sign in or Sign up!</h2>
 	<nav>
 		<a href="/NewBornTracker">Home</a>
 	</nav>
@@ -25,19 +25,32 @@
 				<h3>Sign in</h3>
 				<p>${loginerror}</p>
 				<form id="login" method="post" action="user">
-					<label for="luname">Username</label> <input id="luname" type="text"
-						name="luname" /> <br> <label for="lpword">Password</label> <input
-						id="lpword" type="password" name="lpword" /> <br>
+					<label for="luname">Username</label>
+					<input id="luname" type="text" name="luname" />
+					<br> 
+					<label for="lpword">Password</label>
+					<input id="lpword" type="password" name="lpword" />
+					<br>
 					<button type="submit">sign in</button>
 				</form>
 			</div>
 
 			<div class="col-6 right">
 				<h3>Sign Up</h3>
-				<form id="signup" method="post" action="user">
-					<label for="suname">Username</label> <input id="suname" type="text"
-						name="suname" /> <br> <label for="spword">Password</label> <input
-						id="spword" type="password" name="spword" /> <br>
+				<p>${signuperror}</p>
+				<form id="signup" method="post" action="signup">
+					<label for="suname">Username</label> 
+					<input id="suname" type="text" name="suname" required /> 
+					<br> 
+					<label for="semail">Email</label> 
+					<input id="semail" type="email" name="semail" /> 
+					<br> 
+					<label for="sphone">Phone</label>
+					<input id="sphone" type="text" name="sphone" /> 
+					<br>
+					<label for="spword">Password</label>
+					<input id="spword" type="password" name="spword" required/> 
+					<br>
 					<button type="submit">sign up</button>
 				</form>
 			</div>

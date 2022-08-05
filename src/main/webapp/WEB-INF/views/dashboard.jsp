@@ -52,7 +52,7 @@
 										</label>
 										<div class="row">
 											<div class="col-9">
-												<input type="text" ng-model="ctrl.change.time"
+												<input type="text" ng-model="ctrl.change.eventTime"
 													name="changetime" class="form-control input-sm"
 													placeholder="MM-DD-YYYY HH:MM" ng-pattern="ctrl.regex"
 													required />
@@ -108,14 +108,14 @@
 
 					<div class="row pt-1 px-1" ng-repeat="event in ctrl.changes">
 						<div class="card p-2">
-							<h5 class="card-title">{{ event.type.type }}</h5>
-							<p class="card-text">date: {{ event.time.slice(0,10) }}</p>
-							<p class="card-text">time: {{ event.time.slice(11) }}</p>
+							<h5 class="card-title">{{ event.type.selectType }}</h5>
+							<p class="card-text">date: {{ event.eventTime.slice(0,10) }}</p>
+							<p class="card-text">time: {{ event.eventTime.slice(11) }}</p>
 							<p class="card-text">type: {{ event.type.changeType }}</p>
 							<p class="card-text">notes: {{ event.notes}}</p>
 							<div>
 								<button type="button"
-									ng-click="ctrl.edit(event.id, event.type.type)"
+									ng-click="ctrl.edit(event.id, event.type.selectType)"
 									class="btn btn-warning col-4">Edit</button>
 								<button type="button" ng-click="ctrl.remove(event)"
 									class="btn btn-danger col-4">Remove</button>
@@ -140,7 +140,7 @@
 									<div class="form-group col-md-12">
 										<label class="col control-label" for="feedtime">Time*</label>
 										<div class="col-9">
-											<input type="text" ng-model="ctrl.feed.time" name="feedtime"
+											<input type="text" ng-model="ctrl.feed.eventTime" name="feedtime"
 												class="form-control input-sm" placeholder="MM-DD-YYYY HH:MM"
 												ng-pattern="ctrl.regex" required />
 											<!-- <div class="has-error" ng-show="myFeedForm.$dirty">
@@ -194,14 +194,14 @@
 					</div>
 					<div class="row pt-1 px-1" ng-repeat="event in ctrl.feeds">
 						<div class="card p-2">
-							<h5 class="card-title">{{ event.type.type }}</h5>
-							<p class="card-text">date: {{ event.time.slice(0,10) }}</p>
-							<p class="card-text">time: {{ event.time.slice(11) }}</p>
+							<h5 class="card-title">{{ event.type.selectType }}</h5>
+							<p class="card-text">date: {{ event.eventTime.slice(0,10) }}</p>
+							<p class="card-text">time: {{ event.eventTime.slice(11) }}</p>
 							<p class="card-text">amount: {{ event.type.amount }} oz</p>
 							<p class="card-text">notes: {{ event.notes}}</p>
 							<div>
 								<button type="button"
-									ng-click="ctrl.edit(event.id, event.type.type)"
+									ng-click="ctrl.edit(event.id, event.type.selectType)"
 									class="btn btn-warning col-4">Edit</button>
 								<button type="button" ng-click="ctrl.remove(event)"
 									class="btn btn-danger col-4">Remove</button>
@@ -227,7 +227,7 @@
 										<label class="col-md-4 control-label" for="sleeptime">Fell
 											Asleep*</label>
 										<div class="col-9">
-											<input type="text" ng-model="ctrl.sleep.time"
+											<input type="text" ng-model="ctrl.sleep.eventTime"
 												name="sleeptime" class="form-control input-sm"
 												placeholder="MM-DD-YYYY HH:MM" ng-pattern="ctrl.regex"
 												required />
@@ -285,15 +285,15 @@
 					</div>
 					<div class="row pt-1 px-1" ng-repeat="event in ctrl.sleeps">
 						<div class="card p-2">
-							<h5 class="card-title">{{ event.type.type }}</h5>
-							<p class="card-text">date: {{ event.time.slice(0,10) }}</p>
-							<p class="card-text">time: {{ event.time.slice(11) }}</p>
+							<h5 class="card-title">{{ event.type.selectType }}</h5>
+							<p class="card-text">date: {{ event.eventTime.slice(0,10) }}</p>
+							<p class="card-text">time: {{ event.eventTime.slice(11) }}</p>
 							<p class="card-text">wake up: {{ event.type.wakeup.slice(11)
 								}}</p>
 							<p class="card-text">notes: {{ event.notes}}</p>
 							<div>
 								<button type="button"
-									ng-click="ctrl.edit(event.id, event.type.type)"
+									ng-click="ctrl.edit(event.id, event.type.selectType)"
 									class="btn btn-warning col-4">Edit</button>
 								<button type="button" ng-click="ctrl.remove(event)"
 									class="btn btn-danger col-4">Remove</button>
