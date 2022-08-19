@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 		@Type(value = Feed.class, name = "feed") })
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="selectType", discriminatorType=DiscriminatorType.STRING)
+@DiscriminatorColumn(name="select_type", discriminatorType=DiscriminatorType.STRING)
 @DiscriminatorValue("abs")
 @Table(name="event_type")
 public class EventType {
@@ -34,7 +34,7 @@ public class EventType {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	@OneToOne(mappedBy="selectType")
+	@OneToOne(mappedBy="select_type")
 	private Event event;
 
 	public EventType() {}

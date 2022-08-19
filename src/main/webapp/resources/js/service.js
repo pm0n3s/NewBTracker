@@ -6,7 +6,7 @@ mainServiceFactory.$inject = ['$http', '$log']
 
 function mainServiceFactory($http, $log) {
 
-	const URL = "http://localhost:8080/NewBornTracker/events/";
+	const URL = "http://localhost:8081/events/";
 
 	const factory = {
 		fetchAllEvents: fetchAllEvents,
@@ -47,13 +47,15 @@ function mainServiceFactory($http, $log) {
 
 	function updateEvent(userId, event) {
 		$log.log("made it to service update")
+		$log.log(event)
 		return $http.put(URL + userId + "/" + event.id, event).then(
 			function(response) {
 				$log.log(response)
 				return response.data
 			},
 			function(errResponse) {
-				$log.error('Error while updating event', errResponse);
+				$log.error('Error while updating event service ', errResponse);
+				return errResponse;
 			}
 		);
 	}
