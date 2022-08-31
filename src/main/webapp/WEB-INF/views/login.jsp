@@ -23,7 +23,7 @@
 		<div class="row h-100">
 			<div class="col-6 left">
 				<h3>Sign in</h3>
-				<p>${loginerror}</p>
+				<p id="loginError">${loginerror}</p>
 				<form id="login" method="post" action="user">
 					<label for="luname">Username</label>
 					<input id="luname" type="text" name="luname" />
@@ -31,7 +31,7 @@
 					<label for="lpword">Password</label>
 					<input id="lpword" type="password" name="lpword" />
 					<br>
-					<button type="submit">sign in</button>
+					<button id="lsubmit" type="submit">sign in</button>
 				</form>
 			</div>
 
@@ -51,7 +51,7 @@
 					<label for="spword">Password</label>
 					<input id="spword" type="password" name="spword" required/> 
 					<br>
-					<button type="submit">sign up</button>
+					<button id="ssubmit" type="submit">sign up</button>
 				</form>
 			</div>
 		</div>

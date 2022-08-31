@@ -21,7 +21,7 @@
 			<div class="col-6 left">This App was designed as a space for you to
 				track vital information for your new baby!</div>
 			<div class="col-6 right">
-				<a href="login"><button>Let's Start</button></a>
+				<a href="login"><button id="start">Let's Start</button></a>
 			</div>
 		</div>
 	</div>

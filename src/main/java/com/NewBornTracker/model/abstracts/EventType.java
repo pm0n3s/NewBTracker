@@ -3,7 +3,6 @@ package com.NewBornTracker.model.abstracts;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 		@Type(value = Feed.class, name = "feed") })
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="selectType", discriminatorType=DiscriminatorType.STRING)
+@DiscriminatorColumn(name="select_type", discriminatorType=DiscriminatorType.STRING)
 @DiscriminatorValue("abs")
 @Table(name="event_type")
 public class EventType {
@@ -35,7 +34,7 @@ public class EventType {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	@OneToOne(mappedBy="selectType")
+	@OneToOne(mappedBy="select_type")
 	private Event event;
 
 	public EventType() {}

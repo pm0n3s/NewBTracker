@@ -73,7 +73,7 @@ angular.module('myApp').controller("mainController", ['$scope', '$log', 'mainSer
 			.then(
 				fetchAllEvents,
 				function(errResponse) {
-					$log.error('Error while updating event ', errResponse);
+					$log.error('Error while updating event controller ', errResponse);
 				}
 			);
 	}
@@ -120,6 +120,7 @@ angular.module('myApp').controller("mainController", ['$scope', '$log', 'mainSer
 
 	function edit(id, type) {
 		$log.log('id to be edited', id);
+		$log.log(type);
 		if (type === 'feed') {
 			for (let e of self.feeds) {
 				if (e.id === id) self.feed = angular.copy(e)

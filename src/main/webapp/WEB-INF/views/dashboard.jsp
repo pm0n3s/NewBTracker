@@ -27,7 +27,7 @@
 <body ng-app="myApp">
 	<span ng-cloak ng-controller="userController"
 		ng-init="setUserId(${ user.id })"></span>
-	<h2>welcome back ${user.userName}!</h2>
+	<h2 id="header">welcome back ${user.userName}!</h2>
 	<a href="/NewBornTracker">Log out</a>
 	<div class="container h-100" ng-controller="mainController as ctrl">
 		<div class="container-fluid">
@@ -55,7 +55,7 @@
 												<input type="text" ng-model="ctrl.change.eventTime"
 													name="changetime" class="form-control input-sm"
 													placeholder="MM-DD-YYYY HH:MM" ng-pattern="ctrl.regex"
-													required />
+													required id="changeTime" />
 											</div>
 										</div>
 									</div>
@@ -67,7 +67,7 @@
 											Type*</label>
 										<div class="col-9">
 											<select class="form-select" name="changetype"
-												ng-model="ctrl.change.type.changeType" required>
+												ng-model="ctrl.change.type.changeType" required id="changeType">
 												<option value="">---Please select---</option>
 												<option value="PEE">PEE</option>
 												<option value="POO">POO</option>
@@ -86,14 +86,14 @@
 										<div class="col-9">
 											<input type="text" ng-model="ctrl.change.notes"
 												name="changeNotes" class="form-control input-sm"
-												placeholder="notes" />
+												placeholder="notes" id="changeNotes" />
 										</div>
 									</div>
 								</div>
 
 								<div class="row">
 									<div class="form-actions floatRight">
-										<input type="submit"
+										<input type="submit" id="changeSubmit"
 											value="{{!ctrl.change.id ? 'Add' : 'Update'}}"
 											class="btn btn-primary btn-sm"
 											ng-disabled="myChangeForm.$invalid">
@@ -105,22 +105,23 @@
 							</form>
 						</div>
 					</div>
-
+					<div id="changes">
 					<div class="row pt-1 px-1" ng-repeat="event in ctrl.changes">
-						<div class="card p-2">
-							<h5 class="card-title">{{ event.type.selectType }}</h5>
-							<p class="card-text">date: {{ event.eventTime.slice(0,10) }}</p>
-							<p class="card-text">time: {{ event.eventTime.slice(11) }}</p>
-							<p class="card-text">type: {{ event.type.changeType }}</p>
-							<p class="card-text">notes: {{ event.notes}}</p>
+						<div class="card p-2" id="change{{ event.id }}">
+							<h5 class="card-title" id="changeTitle{{ event.id }}">{{ event.type.selectType }}</h5>
+							<p class="card-text" id="changeDate{{ event.id }}">date: {{ event.eventTime.slice(0,10) }}</p>
+							<p class="card-text" id="changeTime{{ event.id }}">time: {{ event.eventTime.slice(11) }}</p>
+							<p class="card-text" id="changeType{{ event.id }}">type: {{ event.type.changeType }}</p>
+							<p class="card-text" id="changeNotes{{ event.id }}">notes: {{ event.notes}}</p>
 							<div>
 								<button type="button"
 									ng-click="ctrl.edit(event.id, event.type.selectType)"
-									class="btn btn-warning col-4">Edit</button>
+									class="btn btn-warning col-4" id="changeEdit{{event.id}}">Edit</button>
 								<button type="button" ng-click="ctrl.remove(event)"
-									class="btn btn-danger col-4">Remove</button>
+									class="btn btn-danger col-4" id="changeDelete{{event.id}}">Remove</button>
 							</div>
 						</div>
+					</div>
 					</div>
 				</div>
 

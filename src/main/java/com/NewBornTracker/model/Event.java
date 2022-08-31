@@ -35,7 +35,7 @@ public class Event {
 	
 	@OneToOne(cascade = {CascadeType.REMOVE})
 	@JoinColumn(name="selecttype_id")
-	private EventType selectType;
+	private EventType select_type;
 	
 	@Column(name="notes")
 	private String notes;
@@ -51,7 +51,7 @@ public class Event {
 		super();
 		Id = id;
 		this.eventTime = LocalDateTime.parse(time, FORMATTER);
-		this.selectType = type;
+		this.select_type = type;
 		this.notes = notes;
 	}
 
@@ -84,11 +84,11 @@ public class Event {
 	}
 
 	public EventType getType() {
-		return selectType;
+		return select_type;
 	}
 
 	public void setType(EventType type) {
-		this.selectType = type;
+		this.select_type = type;
 	}
 
 	public User getUserId() {
